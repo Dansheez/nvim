@@ -68,3 +68,8 @@ end, '[Harpoon] Next file')
 
 -- UNDOTREE
 nmap('<leader>u', vim.cmd.UndotreeToggle, '[Undotree] Show undotree')
+-- TOGGLETERM
+require 'toggleterm'
+nmap('<C-§>', '<cmd>ToggleTerm<CR>', '[ToggleTerm] Open terminal')
+nmap('<leader>§', '<cmd>ToggleTerm<CR>', '[ToggleTerm] Open terminal')
+
