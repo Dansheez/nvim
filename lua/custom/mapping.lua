@@ -73,3 +73,17 @@ require 'toggleterm'
 nmap('<C-§>', '<cmd>ToggleTerm<CR>', '[ToggleTerm] Open terminal')
 nmap('<leader>§', '<cmd>ToggleTerm<CR>', '[ToggleTerm] Open terminal')
 
+-- LSP SIGNATURE
+local signature_config = {
+  debug = false,
+  hint_enable = false,
+  handler_opts = { border = 'single' },
+  max_width = 80,
+}
+nmap('<C-k>', function()
+  require('lsp_signature').toggle_float_win()
+end, '[LSP Signature] Toggle signature')
+nmap('<leader>k', function()
+  require('lsp_signature').toggle_float_win()
+end, '[LSP Signature] Toggle signature')
+require('lsp_signature').setup(signature_config)
