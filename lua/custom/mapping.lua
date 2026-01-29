@@ -20,6 +20,9 @@ end, '[P]rimeagen [S]earch')
 -- explorer
 nmap('<leader>e', vim.cmd.Ex, 'Open explorer')
 
+-- replace all
+nmap('<leader>i', [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]], 'Replace all instances of a word')
+
 -- keep cursor in one place for half page move
 vim.keymap.set('n', '<C-d>', '<C-d>zz')
 vim.keymap.set('n', '<C-u>', '<C-U>zz')
@@ -33,10 +36,13 @@ nmap('n', 'nzzzv', '')
 nmap('N', 'Nzzzv', '')
 
 -- make current file executable
-nmap('<leader>x', '<cmd>!chmod +x %>CR?', 'Make current file executable')
+nmap('<leader>x', '<cmd>!chmod u+x %<CR>', 'Make current file executable')
 
 -- paste on visual block without replacing buffer
 vim.keymap.set('x', '<leader>p', '"_dP', { desc = 'Paste on visual block without replacing buffer' })
+
+-- undo (u) and redo (U) instead of (<C-r>)
+vim.api.nvim_set_keymap('n', 'U', '<C-r>', { noremap = true, silent = true })
 
 -- Harpoon
 local harpoon = require 'harpoon'
@@ -68,11 +74,7 @@ end, '[Harpoon] Next file')
 
 -- UNDOTREE
 nmap('<leader>u', vim.cmd.UndotreeToggle, '[Undotree] Show undotree')
--- TOGGLETERM
-require 'toggleterm'
-nmap('<C-§>', '<cmd>ToggleTerm<CR>', '[ToggleTerm] Open terminal')
-nmap('<leader>§', '<cmd>ToggleTerm<CR>', '[ToggleTerm] Open terminal')
-
+--
 -- LSP SIGNATURE
 local signature_config = {
   debug = false,
@@ -87,3 +89,13 @@ nmap('<leader>k', function()
   require('lsp_signature').toggle_float_win()
 end, '[LSP Signature] Toggle signature')
 require('lsp_signature').setup(signature_config)
+
+-- remove file from current buffer
+nmap('<leader>wq', ':bd<CR>', 'Remove file from buffer')
+nmap('<leader>wQ', ':bd!<CR>', 'Force remove file from buffer')
+
+require('lspconfig').clangd.setup {
+  init_options = {
+    fallbackFlags = { '-std=c++23' },
+  },
+}
