@@ -44,34 +44,6 @@ vim.keymap.set('x', '<leader>p', '"_dP', { desc = 'Paste on visual block without
 -- undo (u) and redo (U) instead of (<C-r>)
 vim.api.nvim_set_keymap('n', 'U', '<C-r>', { noremap = true, silent = true })
 
--- Harpoon
-local harpoon = require 'harpoon'
-
--- REQUIRED
-harpoon:setup()
--- REQUIRED
-
-nmap('<leader>a', function()
-  harpoon:list():add()
-end, '[Harpoon] Add file')
-
-nmap('<C-h>', function()
-  harpoon.ui:toggle_quick_menu(harpoon:list())
-end, '[Harpoon] Open harpoon window')
-
--- vim.keymap.set("n", "<C-h>", function() harpoon:list():select(1) end)
--- vim.keymap.set("n", "<C-t>", function() harpoon:list():select(2) end)
--- vim.keymap.set("n", "<C-n>", function() harpoon:list():select(3) end)
--- vim.keymap.set("n", "<C-s>", function() harpoon:list():select(4) end)
-
--- Toggle previous & next buffers stored within Harpoon list
-nmap('<C-S-P>', function()
-  harpoon:list():prev()
-end, '[Harpoon] Previous file')
-nmap('<C-S-N>', function()
-  harpoon:list():next()
-end, '[Harpoon] Next file')
-
 -- UNDOTREE
 nmap('<leader>u', vim.cmd.UndotreeToggle, '[Undotree] Show undotree')
 --
@@ -93,9 +65,3 @@ require('lsp_signature').setup(signature_config)
 -- remove file from current buffer
 nmap('<leader>wq', ':bd<CR>', 'Remove file from buffer')
 nmap('<leader>wQ', ':bd!<CR>', 'Force remove file from buffer')
-
-require('lspconfig').clangd.setup {
-  init_options = {
-    fallbackFlags = { '-std=c++23' },
-  },
-}

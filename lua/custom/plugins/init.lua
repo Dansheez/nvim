@@ -5,12 +5,6 @@
 
 return {
   {
-    'ThePrimeagen/harpoon',
-    branch = 'harpoon2',
-    dependencies = { 'nvim-lua/plenary.nvim' },
-  },
-
-  {
     'mbbill/undotree',
   },
 
@@ -21,26 +15,6 @@ return {
     config = function(_, opts)
       require('lsp_signature').setup(opts)
     end,
-  },
-
-  {
-    'kdheepak/lazygit.nvim',
-    cmd = {
-      'LazyGit',
-      'LazyGitConfig',
-      'LazyGitCurrentFile',
-      'LazyGitFilter',
-      'LazyGitFilterCurrentFile',
-    },
-    -- optional for floating window border decoration
-    dependencies = {
-      'nvim-lua/plenary.nvim',
-    },
-    -- setting the keybinding for LazyGit with 'keys' is recommended in
-    -- order to load the plugin when the command is run for the first time
-    keys = {
-      { '<leader>g', '<cmd>LazyGit<cr>', desc = '[LazyGit] Open lazy git' },
-    },
   },
 
   {
@@ -105,6 +79,23 @@ return {
       end
 
       lspconfig.ls_emmet.setup { capabilities = capabilities }
+    end,
+  },
+
+  { -- cool indent arrows
+    'shellRaining/hlchunk.nvim',
+    event = { 'BufReadPre', 'BufNewFile' },
+    config = function()
+      require('hlchunk').setup {
+        chunk = {
+          enable = true,
+          -- ...
+        },
+        indent = {
+          enable = true,
+          -- ...
+        },
+      }
     end,
   },
 }
