@@ -1,21 +1,13 @@
-local nmap = function(key, effect, desc)
-  vim.keymap.set('n', key, effect, { silent = true, noremap = true, desc = desc })
-end
+local nmap = function(key, effect, desc) vim.keymap.set('n', key, effect, { silent = true, noremap = true, desc = desc }) end
 
-local vmap = function(key, effect, desc)
-  vim.keymap.set('v', key, effect, { silent = true, noremap = true, desc = desc })
-end
+local vmap = function(key, effect, desc) vim.keymap.set('v', key, effect, { silent = true, noremap = true, desc = desc }) end
 
-local imap = function(key, effect, desc)
-  vim.keymap.set('i', key, effect, { silent = true, noremap = true, desc = desc })
-end
+local imap = function(key, effect, desc) vim.keymap.set('i', key, effect, { silent = true, noremap = true, desc = desc }) end
 
 -- PEROSNAL
 -- ripgrep primeagen
 local builtin = require 'telescope.builtin'
-nmap('<leader>sp', function()
-  builtin.grep_string { search = vim.fn.input 'Grep > ' }
-end, '[P]rimeagen [S]earch')
+nmap('<leader>sp', function() builtin.grep_string { search = vim.fn.input 'Grep > ' } end, '[P]rimeagen [S]earch')
 
 -- explorer
 nmap('<leader>e', vim.cmd.Ex, 'Open explorer')
@@ -54,12 +46,8 @@ local signature_config = {
   handler_opts = { border = 'single' },
   max_width = 80,
 }
-nmap('<C-k>', function()
-  require('lsp_signature').toggle_float_win()
-end, '[LSP Signature] Toggle signature')
-nmap('<leader>k', function()
-  require('lsp_signature').toggle_float_win()
-end, '[LSP Signature] Toggle signature')
+nmap('<C-k>', function() require('lsp_signature').toggle_float_win() end, '[LSP Signature] Toggle signature')
+nmap('<leader>k', function() require('lsp_signature').toggle_float_win() end, '[LSP Signature] Toggle signature')
 require('lsp_signature').setup(signature_config)
 
 -- remove file from current buffer
